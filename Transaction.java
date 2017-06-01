@@ -6,8 +6,8 @@ import java.io.Serializable;
 public class Transaction implements Serializable{
 	
 	public int amount;
-	public String from;
-	public String to;
+	public String fromPubKey;
+	public String toPubKey;
 	
 	/**
 	 * create new transaction
@@ -17,20 +17,9 @@ public class Transaction implements Serializable{
 	 */
 	public Transaction(int amount, String from, String to){
 		this.amount = amount;
-		this.from = from;
-		this.to= to;
-	}
-	
-	/**
-	 * convert the transaction to a string to be SHA256 hashed
-	 */
-	public String toString(){
-		StringBuilder s = new StringBuilder();
-		s.append(String.valueOf(amount));
-		s.append(from);
-		s.append(to);
-		return s.toString();
-	}
+		this.fromPubKey = from;
+		this.toPubKey= to;
+	}	
 }
 
 

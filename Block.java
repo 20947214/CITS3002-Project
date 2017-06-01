@@ -1,6 +1,10 @@
 package cryptocurrency;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Base64;
 import java.util.LinkedList;
 
 @SuppressWarnings("serial")
@@ -36,9 +40,20 @@ public class Block implements Serializable {
 	}	
 	
 	/**
-	 * converts the block to a string than can be SHA256 hashed
+	 * write the object to a base64 string
 	 */
-	public String toString(){
+	public String toString(){		
+		try {
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			ObjectOutputStream oos = new ObjectOutputStream(baos);
+			oos.writeObject(this);
+			oos.close();
+			return Base64.getEncoder().encodeToString(baos.toByteArray());
+		} catch (IOException e) {			
+			e.printStackTrace();
+		}
+		
+		
 		StringBuilder s = new StringBuilder();
 		s.append(String.valueOf(index));
 		s.append(String.valueOf(nonce));
